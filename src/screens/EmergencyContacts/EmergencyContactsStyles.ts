@@ -1,7 +1,5 @@
-//EmergencyContactsStyles.ts
-
 import { StyleSheet, Platform, StatusBar } from 'react-native';
-import { normalize, screenWidth } from '../../utils/dimensions';
+import { normalize } from '../../utils/dimensions';
 
 export const styles = StyleSheet.create({
   backgroundImage: {
@@ -16,58 +14,60 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: normalize(15)
+    padding: normalize(15),
   },
   contactCard: {
-    flexDirection: 'row',
-    padding: normalize(15),
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: normalize(10),
-    marginBottom: normalize(10),
-    elevation: 2,
+    backgroundColor: '#FFF',
+    borderRadius: normalize(12),
+    overflow: 'hidden',
+    marginBottom: normalize(12),
+    position: 'relative',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    elevation: 3,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowRadius: 3,
   },
-  contactInfo: {
-    flex: 1,
-    marginLeft: normalize(15),
+  contactImage: {
+    width: '100%',
+    height: normalize(150),
+  },
+  contactOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: normalize(10),
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
   contactName: {
     fontSize: normalize(16),
     fontWeight: 'bold',
-    color: '#333',
-  },
-  contactRelation: {
-    fontSize: normalize(14),
-    color: '#666',
-    marginTop: normalize(2),
-  },
-  contactPhone: {
-    fontSize: normalize(14),
-    color: '#666',
-    marginTop: normalize(2),
-  },
-  actionButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: normalize(10),
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: normalize(20),
-  },
-  emptyStateText: {
-    fontSize: normalize(16),
-    color: '#fff',
+    color: '#FFF',
     textAlign: 'center',
-    marginTop: normalize(10),
+    marginBottom: normalize(5),
+  },
+  infoButton: {
+    backgroundColor: '#007BFF',
+    paddingVertical: normalize(6),
+    paddingHorizontal: normalize(15),
+    borderRadius: normalize(5),
+  },
+  infoButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: normalize(14),
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: normalize(10),
+    right: normalize(10),
+    backgroundColor: '#FF6B6B',
+    padding: normalize(8), // Ajustado para ser más grande y clickeable
+    borderRadius: normalize(20),
+    zIndex: 10, // Asegura que el botón esté sobre otros elementos
   },
   addButton: {
     position: 'absolute',
@@ -76,15 +76,12 @@ export const styles = StyleSheet.create({
     width: normalize(56),
     height: normalize(56),
     borderRadius: normalize(28),
-    backgroundColor: '#FF7E7B',
+    backgroundColor: '#00ACAC', // Color de Figma
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },

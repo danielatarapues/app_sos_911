@@ -1,5 +1,3 @@
-//EmergencyContacts.tsx
-
 import React, { useState } from 'react';
 import {
   View,
@@ -8,30 +6,40 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
+  Image,
   ImageBackground,
 } from 'react-native';
-import { Plus, UserCircle, Edit2, Trash2 } from 'lucide-react-native';
+import { Plus, Trash2 } from 'lucide-react-native';
 import CustomSidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
 import { styles } from './EmergencyContactsStyles';
-import { Contact, EmergencyContactsProps } from './types';
 import { normalize } from '../../utils/dimensions';
 
-const EmergencyContactsScreen: React.FC<EmergencyContactsProps> = ({ navigation }) => {
-  const [contacts, setContacts] = useState<Contact[]>([
+const EmergencyContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const [contacts, setContacts] = useState<any[]>([
     {
       id: '1',
-      name: 'María García',
-      phone: '+593 985 345 678',
-      relation: 'Madre',
+      name: 'Ismael Vargas',
+      phone: '+593 987 654 321',
+      relation: 'Amigo',
+      image: require('../../assets/ismael.jpg'),
     },
     {
       id: '2',
-      name: 'Juan Pérez',
-      phone: '+593 987 456 789',
-      relation: 'Hermano',
+      name: 'Erick Iza',
+      phone: '+593 986 543 210',
+      relation: 'Compañero',
+      image: require('../../assets/erick.jpg'),
+    },
+    {
+      id: '3',
+      name: 'Carlos Rivera',
+      phone: '+593 985 432 109',
+      relation: 'Vecino',
+      image: require('../../assets/carlos.jpg'),
     },
   ]);
+
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const handleDelete = (id: string) => {
@@ -51,77 +59,47 @@ const EmergencyContactsScreen: React.FC<EmergencyContactsProps> = ({ navigation 
     );
   };
 
-  const handleEdit = (contact: Contact) => {
-    navigation.navigate('EditContact', { contactId: contact.id });
+  const addContact = (contact: any) => {
+    setContacts(prevContacts => [...prevContacts, contact]);
   };
 
-  const handleAdd = () => {
-    navigation.navigate('AddContact');
-  };
-
-  const renderContactCard = (contact: Contact) => (
+  const renderContactCard = (contact: any) => (
     <View key={contact.id} style={styles.contactCard}>
-      <UserCircle size={normalize(40)} color="#666" />
-      <View style={styles.contactInfo}>
-        <Text style={styles.contactName}>{contact.name}</Text>
-        <Text style={styles.contactRelation}>{contact.relation}</Text>
-        <Text style={styles.contactPhone}>{contact.phone}</Text>
-      </View>
-      <View style={styles.actionButtons}>
-        <TouchableOpacity 
-          onPress={() => handleEdit(contact)}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Edit2 size={normalize(20)} color="#666" />
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => handleDelete(contact.id)}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Trash2 size={normalize(20)} color="#ff3b30" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+      <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(contact.id)}>
+        <Trash2 size={normalize(24)} color="#FFF" />
+      </TouchableOpacity>
 
-  const renderEmptyState = () => (
-    <View style={styles.emptyState}>
-      <UserCircle size={normalize(50)} color="#666" />
-      <Text style={styles.emptyStateText}>
-        No tienes ningún contacto de emergencia.{'\n'}
-        Añade uno pulsando el botón +
-      </Text>
+      <Image source={contact.image} style={styles.contactImage} />
+      <View style={styles.contactOverlay}>
+        <Text style={styles.contactName}>{contact.name}</Text>
+        <TouchableOpacity
+          style={styles.infoButton}
+          onPress={() => navigation.navigate('ContactDetails', { contact })}
+        >
+          <Text style={styles.infoButtonText}>Ver Información</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
   return (
-    <ImageBackground 
-      source={require('../../assets/fondo.png')} 
-      style={styles.backgroundImage}
-      resizeMode="cover"
-    >
+    <ImageBackground source={require('../../assets/fondo.png')} style={styles.backgroundImage} resizeMode="cover">
       <SafeAreaView style={styles.container}>
-        <Header 
-          onMenuPress={() => setSidebarOpen(true)}
-          customTitle="Contactos de Emergencia" 
-        />
+        <Header onMenuPress={() => setSidebarOpen(true)} customTitle="Contactos de Emergencia" />
 
         <ScrollView style={styles.content}>
-          {contacts.length > 0 ? contacts.map(renderContactCard) : renderEmptyState()}
+          {contacts.map(renderContactCard)}
         </ScrollView>
 
-        <TouchableOpacity 
-          style={styles.addButton} 
-          onPress={handleAdd}
+        <TouchableOpacity
+          style={styles.addButton}
           activeOpacity={0.8}
+          onPress={() => navigation.navigate('AddContact', { addContact })}
         >
           <Plus size={normalize(24)} color="#FFF" />
         </TouchableOpacity>
 
-        <CustomSidebar
-          isOpen={isSidebarOpen}
-          onClose={() => setSidebarOpen(false)}
-        />
+        <CustomSidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
       </SafeAreaView>
     </ImageBackground>
   );
