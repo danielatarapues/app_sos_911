@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RegisterStyles } from './RegisterStyles';
-import { RegisterScreenNavigationProp } from '../../../navigation/authNavigator';
+import { RegisterScreenNavigationProp } from '../../../navigation/Navigator';
 import { Ionicons } from '@expo/vector-icons'; // Importa los íconos de Ionicons
 
 export default function RegisterScreen() {

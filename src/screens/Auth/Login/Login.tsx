@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { LoginScreenNavigationProp } from '../../../navigation/authNavigator';
+import { LoginScreenNavigationProp } from '../../../navigation/Navigator';
 import { LoginStyles } from './LoginStyles';
 
 export default function LoginScreen() {
