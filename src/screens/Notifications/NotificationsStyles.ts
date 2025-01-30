@@ -1,0 +1,82 @@
+import { StyleSheet, Platform, StatusBar } from 'react-native';
+import { normalize } from '../../utils/dimensions';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f4f4',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  content: {
+    flex: 1,
+    padding: normalize(15),
+  },
+  profileContainer: {
+    alignItems: 'center',
+    marginBottom: normalize(20),
+  },
+  profilePicture: {
+    width: normalize(80),
+    height: normalize(80),
+    borderRadius: normalize(40),
+  },
+  profileName: {
+    fontSize: normalize(18),
+    fontWeight: 'bold',
+    color: '#333',
+    marginTop: normalize(10),
+  },
+  notificationCard: {
+    backgroundColor: '#fff',
+    padding: normalize(15),
+    borderRadius: normalize(10),
+    marginBottom: normalize(10),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  notificationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: normalize(5),
+  },
+  communityText: {
+    fontSize: normalize(14),
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  timeText: {
+    fontSize: normalize(12),
+    color: '#666',
+  },
+  notificationContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  notificationInfo: {
+    flex: 1,
+    marginLeft: normalize(10),
+  },
+  notificationTitle: {
+    fontSize: normalize(16),
+    fontWeight: 'bold',
+    color: '#ff6600',
+  },
+  notificationDescription: {
+    fontSize: normalize(14),
+    color: '#666',
+    marginTop: normalize(2),
+  },
+  profileImage: {
+    width: normalize(40),
+    height: normalize(40),
+    borderRadius: normalize(20),
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: normalize(10),
+  },
+});
