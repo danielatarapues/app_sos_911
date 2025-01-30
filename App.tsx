@@ -6,7 +6,7 @@ import LoginScreen from './src/screens/Auth/Login/Login';
 import RegisterScreen from './src/screens/Auth/Register/Register';
 import HomeScreen from './src/screens/Home/Home';
 import EmergencyContactsScreen from './src/screens/EmergencyContacts/EmergencyContacts';
-
+import GroupsScreen from './src/screens/Groups/Groups';
 
 
 // Definimos los tipos de rutas
@@ -14,6 +14,7 @@ type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   Home: undefined;
+  Groups: undefined;
   EmergencyContacts: undefined;
   Profile: undefined;
   Settings: undefined;
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
           <Stack.Screen name="Profile" component={HomeScreen} />
+          <Stack.Screen name="Groups" component={GroupsScreen} />
           <Stack.Screen name="Settings" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>

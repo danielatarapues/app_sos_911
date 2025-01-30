@@ -8,7 +8,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { LogOut, Home, User, Settings, PhoneCall } from 'lucide-react-native';
+import { LogOut, Home, User, Settings, PhoneCall, Users } from 'lucide-react-native';
 import { styles } from './SidebarStyles';
 import { CustomSidebarProps, MenuItem, RootStackParamList } from './types';
 import { normalize } from '../../utils/dimensions';
@@ -23,6 +23,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Inicio', screen: 'Home' },
     { title: 'Contactos de Emergencia', screen: 'EmergencyContacts' },
     { title: 'Perfil', screen: 'Profile' },
+    { title: 'Grupos', screen: 'Groups' },
     { title: 'Configuración', screen: 'Settings' },
   ];
 
@@ -72,6 +73,8 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <User size={iconSize} color={iconColor} />;
       case 'Configuración':
         return <Settings size={iconSize} color={iconColor} />;
+      case 'Grupos':
+        return <Users size={iconSize} color={iconColor} />;
       default:
         return null;
     }

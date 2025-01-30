@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Home: undefined;
   EmergencyContacts: undefined;
   Profile: undefined;
+  Groups: undefined;
   Settings: undefined;
   Login: undefined;
 };
