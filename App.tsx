@@ -8,8 +8,8 @@ import LoginScreen from './src/screens/Auth/Login/Login';
 import RegisterScreen from './src/screens/Auth/Register/Register';
 import HomeScreen from './src/screens/Home/Home';
 import EmergencyContactsScreen from './src/screens/EmergencyContacts/EmergencyContacts';
-import ContactDetailsScreen from './src/screens/EmergencyContacts/ContactDetails';
-import AddContactScreen from './src/screens/EmergencyContacts/AddContact';
+import ContactDetailsScreen from './src/screens/EmergencyContacts/Details/ContactDetails';
+import AddContactScreen from './src/screens/EmergencyContacts/Add/AddContact';
 import GroupsScreen from './src/screens/Groups/Groups';
 
 

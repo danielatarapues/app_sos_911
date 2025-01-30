@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from './types';
+import { RootStackParamList } from '../types';
 import { styles } from './AddContactStyles';
 
 // Definir el tipo de las props correctamente
@@ -35,7 +35,7 @@ const AddContact = ({ navigation, route }: AddContactProps) => {
       name,
       phone,
       relation: detail,
-      image: image ? { uri: image } : require('../../assets/default-avatar.jpg'),
+      image: image ? { uri: image } : require('../../../assets/default-avatar.jpg'),
     };
 
     if (route.params?.addContact) {
@@ -66,7 +66,7 @@ const AddContact = ({ navigation, route }: AddContactProps) => {
   };
 
   return (
-    <ImageBackground source={require('../../assets/fondito.jpg')} style={styles.backgroundImage}>
+    <ImageBackground source={require('../../../assets/fondito.jpg')} style={styles.backgroundImage}>
       <SafeAreaView style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />

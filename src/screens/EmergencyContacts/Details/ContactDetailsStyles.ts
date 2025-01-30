@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { normalize } from '../../utils/dimensions';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
+import { normalize } from '../../../utils/dimensions';
 
 export const styles = StyleSheet.create({
   backgroundImage: {
@@ -8,10 +8,13 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    padding: normalize(16),
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   card: {
     backgroundColor: '#FFF',
@@ -19,12 +22,15 @@ export const styles = StyleSheet.create({
     padding: normalize(20),
     width: '90%',
     alignItems: 'center',
+    alignSelf: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 6,
-    marginTop: normalize(20),
+    position: 'absolute',
+    top: '50%',
+    transform: [{ translateY: -normalize(150) }],
   },
   imageContainer: {
     position: 'relative',
@@ -32,6 +38,7 @@ export const styles = StyleSheet.create({
     height: normalize(120),
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: normalize(15),
   },
   contactImage: {
     width: '100%',
@@ -64,42 +71,24 @@ export const styles = StyleSheet.create({
     fontSize: normalize(16),
     color: '#888',
     fontStyle: 'normal',
-  },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#00ACAC',
-    paddingVertical: normalize(12),
-    paddingHorizontal: normalize(20),
-    borderRadius: normalize(8),
-    marginTop: normalize(20),
-  },
-  buttonText: {
-    fontSize: normalize(18),
-    color: '#FFF',
-    fontWeight: 'bold',
-  },
-  icon: {
-    marginRight: 8,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    marginBottom: normalize(10),
   },
   modalContent: {
     backgroundColor: '#FFF',
-    padding: normalize(20),
     borderRadius: normalize(12),
-    width: '82%',
+    padding: normalize(20),
+    width: '90%',
     alignItems: 'center',
-  },
-  modalTitle: {
-    fontSize: normalize(20),
-    fontWeight: 'bold',
-    marginBottom: normalize(10),
-    color: '#333',
+    alignSelf: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 6,
+    marginTop: normalize(20),
+    position: 'absolute',
+    top: '45%',
+    transform: [{ translateY: -normalize(200) }],
   },
   modalImage: {
     width: normalize(100),
@@ -114,6 +103,7 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(8),
     borderRadius: normalize(8),
     fontSize: normalize(16),
+    backgroundColor: '#FFFFFF',
   },
   saveButton: {
     flexDirection: 'row',
@@ -124,15 +114,24 @@ export const styles = StyleSheet.create({
     paddingHorizontal: normalize(24),
     borderRadius: normalize(8),
     marginTop: normalize(20),
+    width: '100%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
   },
-  saveButtonText: {
+  buttonText: {
     fontSize: normalize(18),
     color: '#FFF',
     fontWeight: 'bold',
+  },
+  // En ContactDetailsStyles.ts
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+    padding: 10,
   },
 });

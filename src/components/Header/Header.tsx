@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
         style={headerStyles.menuButton}
       >
         {showBackButton ? (
-          <ChevronLeft size={24} color="#000" />
+          <ChevronLeft size={24} color="#e8e8e8" />
         ) : (
           <Menu size={24} color="#000" />
         )}

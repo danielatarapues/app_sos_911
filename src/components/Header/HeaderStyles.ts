@@ -7,7 +7,7 @@ export const headerStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: normalize(16),
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.0)',
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
   },
@@ -18,6 +18,6 @@ export const headerStyles = StyleSheet.create({
     fontSize: normalize(18),
     fontWeight: '600',
     marginLeft: normalize(16),
-    color: '#000',
+    color: '#e8e8e8',
   },
 });
