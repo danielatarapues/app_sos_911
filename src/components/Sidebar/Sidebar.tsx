@@ -8,7 +8,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { LogOut, Home, User, Settings, PhoneCall, Users } from 'lucide-react-native';
+import { LogOut, Home, User, Settings, PhoneCall, Users, NotebookText } from 'lucide-react-native';
 import { styles } from './SidebarStyles';
 import { CustomSidebarProps, MenuItem, RootStackParamList } from './types';
 import { normalize } from '../../utils/dimensions';
@@ -25,6 +25,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Perfil', screen: 'Profile' },
     { title: 'Grupos', screen: 'Groups' },
     { title: 'Configuración', screen: 'Settings' },
+    { title: 'Informes' , screen : 'Information'}
   ];
 
   // Manejador del botón de retroceso en Android
@@ -75,6 +76,8 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <Settings size={iconSize} color={iconColor} />;
       case 'Grupos':
         return <Users size={iconSize} color={iconColor} />;
+        case 'Informes':
+          return <NotebookText size={iconSize} color={iconColor} />;
       default:
         return null;
     }

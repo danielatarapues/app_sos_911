@@ -8,6 +8,7 @@ export type RootStackParamList = {
   Groups: undefined;
   Settings: undefined;
   Login: undefined;
+  Information:undefined;
 };
 
 // Props para el componente Sidebar
