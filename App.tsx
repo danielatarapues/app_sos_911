@@ -11,6 +11,8 @@ import EmergencyContactsScreen from './src/screens/EmergencyContacts/EmergencyCo
 import ContactDetailsScreen from './src/screens/EmergencyContacts/Details/ContactDetails';
 import AddContactScreen from './src/screens/EmergencyContacts/Add/AddContact';
 import GroupsScreen from './src/screens/Groups/Groups';
+import ProfileScreen from './src/screens/Profile/Profile';
+import InformationScreen from './src/screens/Information/Information';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -32,7 +34,12 @@ export default function App() {
           <Stack.Screen name="ContactDetails" component={ContactDetailsScreen} />
           <Stack.Screen name="AddContact" component={AddContactScreen} />
           <Stack.Screen name="Groups" component={GroupsScreen} />
-          <Stack.Screen name="Profile" component={HomeScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Information" component={InformationScreen} />
+
+
+
+          
           <Stack.Screen name="Settings" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
