@@ -1,4 +1,3 @@
-// Header.tsx
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
@@ -24,14 +23,16 @@ const Header: React.FC<HeaderProps> = ({
         return 'Contactos de Emergencia';
       case 'Profile':
         return 'Mi Perfil';
-      case 'Settings':
-        return 'Configuración';
       case 'Groups':
         return 'Grupos';
       case 'AddContact':
         return 'Agregar Contacto';
       case 'EditContact':
         return 'Editar Contacto';
+      case 'Location':
+        return 'Ubicación';
+      case 'Information':
+        return 'Información';
       default:
         return 'Inicio';
     }
@@ -42,14 +43,17 @@ const Header: React.FC<HeaderProps> = ({
       <TouchableOpacity
         onPress={showBackButton ? onBackPress : onMenuPress}
         style={headerStyles.menuButton}
+        activeOpacity={0.7}
       >
         {showBackButton ? (
-          <ChevronLeft size={24} color="#e8e8e8" />
+          <ChevronLeft size={24} color="#FFFFFF" />
         ) : (
-          <Menu size={24} color="#000" />
+          <Menu size={24} color="#FFFFFF" />
         )}
       </TouchableOpacity>
-      <Text style={headerStyles.headerTitle}>{getTitleByRoute()}</Text>
+      <Text numberOfLines={1} style={headerStyles.headerTitle}>
+        {getTitleByRoute()}
+      </Text>
     </View>
   );
 };

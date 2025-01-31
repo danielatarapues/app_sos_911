@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -6,12 +6,14 @@ import {
   SafeAreaView,
   ImageBackground,
 } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './LocationStyles';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import SeeLocations from './SeeLocations/SeeLocations'; // Importamos el componente que mostramos en el modal
+import SeeLocations from './SeeLocations/SeeLocations';
+import Header from '../../components/Header/Header';
+import CustomSidebar from '../../components/Sidebar/Sidebar';
 
 type RootStackParamList = {
   LocationScreen: undefined;
@@ -22,43 +24,92 @@ type LocationScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 const LocationScreen = () => {
   const navigation = useNavigation<LocationScreenNavigationProp>();
-
-  // Definimos el estado para las ubicaciones visibles y el tipo Location[]
-  const [visibleLocations, setVisibleLocations] = useState<Location[]>([]); // Cambié el tipo a Location[]
-  const [currentLocation, setCurrentLocation] = useState({
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [visibleLocations, setVisibleLocations] = useState<Location[]>([]);
+  const [mapReady, setMapReady] = useState(false);
+  const mapRef = useRef<MapView | null>(null);
+  
+  const [currentLocation, setCurrentLocation] = useState<Region>({
     latitude: -0.180653,
     longitude: -78.467834,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
+    latitudeDelta: 0.005,
+    longitudeDelta: 0.005,
   });
 
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Permiso de ubicación denegado.');
-        return;
+      try {
+        console.log('Solicitando permisos de ubicación...');
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        console.log('Estado de los permisos:', status);
+
+        if (status !== 'granted') {
+          console.log('Permiso denegado');
+          alert('Permiso de ubicación denegado.');
+          return;
+        }
+
+        console.log('Obteniendo ubicación actual...');
+        let location = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Balanced,
+        });
+
+        console.log('Ubicación obtenida:', location);
+        console.log('Latitud:', location.coords.latitude);
+        console.log('Longitud:', location.coords.longitude);
+
+        const newRegion: Region = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
+        };
+
+        setCurrentLocation(newRegion);
+        
+        if (mapRef.current && mapReady) {
+          mapRef.current.animateToRegion(newRegion, 1000);
+        }
+
+        console.log('Estado actualizado con nueva ubicación');
+      } catch (error) {
+        console.error('Error al obtener la ubicación:', error);
+        alert('Error al obtener la ubicación. Por favor, inténtalo de nuevo.');
       }
-      let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
     })();
-  }, []);
+  }, [mapReady]);
 
   const handleShowCurrentLocation = async () => {
-    let location = await Location.getCurrentPositionAsync({});
-    setCurrentLocation({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    });
+    try {
+      console.log('Actualizando ubicación actual...');
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+      
+      console.log('Nueva ubicación obtenida:', location);
+      console.log('Nueva Latitud:', location.coords.latitude);
+      console.log('Nueva Longitud:', location.coords.longitude);
+
+      const newRegion: Region = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      };
+
+      setCurrentLocation(newRegion);
+      
+      if (mapRef.current && mapReady) {
+        mapRef.current.animateToRegion(newRegion, 1000);
+      }
+
+      console.log('Estado actualizado con la ubicación más reciente');
+    } catch (error) {
+      console.error('Error al actualizar la ubicación:', error);
+      alert('Error al actualizar la ubicación. Por favor, inténtalo de nuevo.');
+    }
   };
 
   const handleShowSavedLocations = () => {
@@ -72,30 +123,62 @@ const LocationScreen = () => {
       resizeMode="cover"
     >
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={30} color="white" />
-        </TouchableOpacity>
+        <Header
+          onMenuPress={() => setSidebarOpen(true)}
+          customTitle="Ubicación"
+        />
 
-        <View style={styles.mapContainer}>
-          <MapView style={styles.map} region={currentLocation}>
-            <Marker coordinate={currentLocation} />
-          </MapView>
+        <View style={styles.content}>
+          <View style={styles.mapContainer}>
+            <MapView 
+              provider={PROVIDER_GOOGLE}
+              ref={mapRef}
+              style={styles.map}
+              initialRegion={currentLocation}
+              onMapReady={() => {
+                console.log('Mapa listo');
+                setMapReady(true);
+              }}
+              showsUserLocation={true}
+              showsMyLocationButton={false}
+              followsUserLocation={true}
+            >
+              <Marker 
+                coordinate={{
+                  latitude: currentLocation.latitude,
+                  longitude: currentLocation.longitude
+                }}
+                title="Mi ubicación"
+                description="Estás aquí"
+              />
+            </MapView>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+              style={styles.button} 
+              onPress={handleShowCurrentLocation}
+            >
+              <Ionicons name="locate-outline" size={20} color="white" />
+              <Text style={styles.buttonText}>Ver mi ubicación actual</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.buttonSecondary} 
+              onPress={handleShowSavedLocations}
+            >
+              <Ionicons name="location-outline" size={20} color="white" />
+              <Text style={styles.buttonText}>Ver mis ubicaciones</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleShowCurrentLocation}>
-            <Ionicons name="locate-outline" size={20} color="white" />
-            <Text style={styles.buttonText}>Ver mi ubicación actual</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.buttonSecondary} onPress={handleShowSavedLocations}>
-            <Ionicons name="location-outline" size={20} color="white" />
-            <Text style={styles.buttonText}>Ver mis ubicaciones</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Modal que contiene SeeLocations */}
         {modalVisible && <SeeLocations closeModal={() => setModalVisible(false)} />}
+
+        <CustomSidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+        />
       </SafeAreaView>
     </ImageBackground>
   );

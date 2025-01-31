@@ -6,34 +6,28 @@ import {
   Animated,
   SafeAreaView,
   BackHandler,
+  Image,
 } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { LogOut, Home, User, Settings, PhoneCall, Users } from 'lucide-react-native';
+import { LogOut, Home, User, PhoneCall, Users, Info, MapPin } from 'lucide-react-native';
 import { styles } from './SidebarStyles';
 import { CustomSidebarProps, MenuItem, RootStackParamList } from './types';
 import { normalize } from '../../utils/dimensions';
-import { MapPin } from 'lucide-react-native';  // Importar el ícono MapPin
-
-// El resto de tu código sigue igual...
-
 
 const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
   const [slideAnim] = useState(new Animated.Value(-styles.sidebar.width));
   const [overlayAnim] = useState(new Animated.Value(0));
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  // Lista de items del menú con sus iconos correspondientes
   const menuItems: MenuItem[] = [
     { title: 'Inicio', screen: 'Home' },
     { title: 'Contactos de Emergencia', screen: 'EmergencyContacts' },
     { title: 'Perfil', screen: 'Profile' },
     { title: 'Grupos', screen: 'Groups' },
-    { title: 'Configuración', screen: 'Settings' },
     { title: 'Ubicación', screen: 'Location' },
-    { title: 'Informacion', screen: 'Information' },
+    { title: 'Información', screen: 'Information' },
   ];
 
-  // Manejador del botón de retroceso en Android
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -49,7 +43,6 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     return () => backHandler.remove();
   }, [isOpen, onClose]);
 
-  // Animación del sidebar y overlay
   useEffect(() => {
     Animated.parallel([
       Animated.timing(slideAnim, {
@@ -65,10 +58,9 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     ]).start();
   }, [isOpen, slideAnim, overlayAnim]);
 
-  // Renderiza el icono correspondiente según el título del menú
   const renderIcon = (title: string) => {
     const iconSize = normalize(20);
-    const iconColor = '#333';
+    const iconColor = '#ffff';
 
     switch (title) {
       case 'Inicio':
@@ -77,17 +69,14 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <PhoneCall size={iconSize} color={iconColor} />;
       case 'Perfil':
         return <User size={iconSize} color={iconColor} />;
-      case 'Configuración':
-        return <Settings size={iconSize} color={iconColor} />;
       case 'Grupos':
         return <Users size={iconSize} color={iconColor} />;
-        case 'Ubicación':  // Icono para "Ubicación"
+      case 'Ubicación':
         return <MapPin size={iconSize} color={iconColor} />;
-        case 'Informacion':
-          return <Users size={iconSize} color={iconColor} />;
+      case 'Información':
+        return <Info size={iconSize} color={iconColor} />;
       default:
         return null;
-        
     }
   };
 
@@ -124,7 +113,15 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
       >
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.headerText}>SOS 911</Text>
+            <Image 
+              source={require('../../assets/logo/icon.png')}
+              style={styles.headerImage}
+              resizeMode="contain"
+            />
+            <View style={styles.headerContent}>
+              <Text style={styles.headerText}>SOS 911</Text>
+              <Text style={styles.headerSubText}>Emergencias</Text>
+            </View>
           </View>
 
           <View style={styles.menuContainer}>

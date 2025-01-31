@@ -36,11 +36,6 @@ export default function App() {
           <Stack.Screen name="Groups" component={GroupsScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Information" component={InformationScreen} />
-
-
-
-          
-          <Stack.Screen name="Settings" component={HomeScreen} />
           <Stack.Screen name="Location" component={LocationScreen} /> 
         </Stack.Navigator>
       </NavigationContainer>
