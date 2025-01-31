@@ -3,7 +3,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './src/navigation/Navigator'; // Importamos los tipos
-
 import LoginScreen from './src/screens/Auth/Login/Login';
 import RegisterScreen from './src/screens/Auth/Register/Register';
 import HomeScreen from './src/screens/Home/Home';
@@ -11,6 +10,8 @@ import EmergencyContactsScreen from './src/screens/EmergencyContacts/EmergencyCo
 import ContactDetailsScreen from './src/screens/EmergencyContacts/Details/ContactDetails';
 import AddContactScreen from './src/screens/EmergencyContacts/Add/AddContact';
 import GroupsScreen from './src/screens/Groups/Groups';
+import LocationScreen from './src/screens/Location/Location'; // Importa la pantalla de ubicación
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -34,6 +35,7 @@ export default function App() {
           <Stack.Screen name="Groups" component={GroupsScreen} />
           <Stack.Screen name="Profile" component={HomeScreen} />
           <Stack.Screen name="Settings" component={HomeScreen} />
+          <Stack.Screen name="Location" component={LocationScreen} /> 
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

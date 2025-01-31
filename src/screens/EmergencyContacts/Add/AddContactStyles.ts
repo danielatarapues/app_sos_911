@@ -5,25 +5,37 @@ export const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.85)',
     paddingTop: normalize(20),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  backButton: {
-    position: 'absolute',
-    top: normalize(25), // Movido un poco más abajo
-    left: normalize(15),
-    zIndex: 10,
-    backgroundColor: '#F3F4F6', // Color actualizado
-    padding: normalize(10),
-    borderRadius: normalize(5),
+  scrollContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   form: {
-    flex: 1,
+    backgroundColor: '#fff',
+    width: normalize(320), // Establece un ancho fijo
     padding: normalize(20),
-    marginTop: normalize(50),
+    borderRadius: normalize(15),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    minHeight: normalize(400), // Establece una altura mínima
+    maxHeight: 'auto', // Permite que el formulario se expanda si es necesario
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    padding: normalize(10),
+    marginBottom: normalize(10),
   },
   label: {
     fontSize: normalize(16),
@@ -39,33 +51,23 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(15),
     backgroundColor: '#fff',
   },
-  textarea: {
-    height: normalize(80),
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: normalize(5),
-    paddingLeft: normalize(10),
-    paddingTop: normalize(8),
-    marginBottom: normalize(20),
-    textAlignVertical: 'top',
-    backgroundColor: '#fff',
-  },
   saveButton: {
-    flexDirection: 'row', // Alineación horizontal para ícono y texto
+    flexDirection: 'row',
     backgroundColor: '#00ACAC',
     paddingVertical: normalize(12),
     borderRadius: normalize(5),
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: normalize(10),
   },
   saveButtonText: {
     color: '#fff',
     fontSize: normalize(16),
     fontWeight: 'bold',
-    marginLeft: normalize(8), // Espacio entre ícono y texto
+    marginLeft: normalize(8),
   },
   saveIcon: {
-    marginRight: normalize(8), // Espacio entre ícono y texto
+    marginRight: normalize(8),
   },
   imagePicker: {
     alignSelf: 'center',

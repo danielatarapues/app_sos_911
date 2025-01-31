@@ -61,10 +61,10 @@ const ContactDetailsScreen: React.FC<ContactDetailsProps> = ({ route, navigation
   };
 
   return (
-    <ImageBackground source={require('../../../assets/fondo2.jpg')} style={styles.backgroundImage}>
-        
+    <ImageBackground source={require('../../../assets/fondo.png')} style={styles.backgroundImage}>
+
       <SafeAreaView style={styles.container}>
-      <Header
+        <Header
           onMenuPress={() => setSidebarOpen(true)}
           showBackButton
           onBackPress={() => navigation.goBack()}
@@ -89,16 +89,16 @@ const ContactDetailsScreen: React.FC<ContactDetailsProps> = ({ route, navigation
 
       {/* Modal de Edición */}
       <Modal visible={modalVisible} animationType="slide">
-        <ImageBackground source={require('../../../assets/fondo2.jpg')} style={styles.backgroundImage}>
-        <SafeAreaView style={styles.modalContainer}>
-          
+        <ImageBackground source={require('../../../assets/fondo.png')} style={styles.backgroundImage}>
+          <SafeAreaView style={styles.modalContainer}>
+
             <View style={styles.modalContent}>
-            <TouchableOpacity 
-              style={styles.backButton} 
-              onPress={() => setModalVisible(false)}
-            >
-              <Feather name="arrow-left" size={24} color="#000" />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Feather name="arrow-left" size={24} color="#000" />
+              </TouchableOpacity>
 
               <TouchableOpacity onPress={handleImageChange} style={styles.imageContainer}>
                 <Image
@@ -131,8 +131,10 @@ const ContactDetailsScreen: React.FC<ContactDetailsProps> = ({ route, navigation
               />
 
               <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                <Text style={styles.buttonText}>Guardar</Text>
+                <Feather name="save" size={24} color="white" />
+                <Text style={[styles.buttonText, { marginLeft: 8 }]}>Guardar</Text>
               </TouchableOpacity>
+
             </View>
           </SafeAreaView>
         </ImageBackground>
