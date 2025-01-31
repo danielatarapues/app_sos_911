@@ -7,15 +7,19 @@ import {
   SafeAreaView,
   Image,
   Alert,
-  ImageBackground
+  ImageBackground,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
 import { styles } from './AddContactStyles';
+import { Feather } from '@expo/vector-icons';
 
-// Definir el tipo de las props correctamente
+
 type AddContactProps = StackScreenProps<RootStackParamList, 'AddContact'>;
 
 const AddContact = ({ navigation, route }: AddContactProps) => {
@@ -66,48 +70,53 @@ const AddContact = ({ navigation, route }: AddContactProps) => {
   };
 
   return (
-    <ImageBackground source={require('../../../assets/fondito.jpg')} style={styles.backgroundImage}>
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
+    <ImageBackground source={require('../../../assets/fondo.png')} style={styles.backgroundImage}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+        >
+          <SafeAreaView style={styles.container}>
+            <View style={styles.form}>
+              <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                <Ionicons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
 
-        <View style={styles.form}>
-          <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
-            {image ? (
-              <Image source={{ uri: image }} style={styles.contactImage} />
-            ) : (
-              <Text style={styles.imagePlaceholder}>Seleccionar foto</Text>
-            )}
-          </TouchableOpacity>
+              <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
+                {image ? (
+                  <Image source={{ uri: image }} style={styles.contactImage} />
+                ) : (
+                  <Text style={styles.imagePlaceholder}>Seleccionar foto</Text>
+                )}
+              </TouchableOpacity>
 
-          <Text style={styles.label}>Nombre:</Text>
-          <TextInput style={styles.input} placeholder="Ej. Juan Pérez" value={name} onChangeText={setName} />
+              <Text style={styles.label}>Nombre:</Text>
+              <TextInput style={styles.input} placeholder="Ej. Juan Pérez" value={name} onChangeText={setName} />
 
-          <Text style={styles.label}>Teléfono:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="+593 987 654 321"
-            keyboardType="phone-pad"
-            value={phone}
-            onChangeText={setPhone}
-          />
+              <Text style={styles.label}>Teléfono:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="+593 987 654 321"
+                keyboardType="phone-pad"
+                value={phone}
+                onChangeText={setPhone}
+              />
 
-          <Text style={styles.label}>Detalle:</Text>
-          <TextInput
-            style={styles.textarea}
-            placeholder="Ej. Médico de confianza, compañero de trabajo, etc."
-            value={detail}
-            onChangeText={setDetail}
-            multiline
-          />
+              <Text style={styles.label}>Detalle:</Text>
+              <TextInput style={styles.input} placeholder="Ej. Amigo cercano" value={detail} onChangeText={setDetail} />
 
-          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-            <Ionicons name="save" size={20} color="white" style={styles.saveIcon} />
-            <Text style={styles.saveButtonText}>Guardar</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+              <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                <Feather name="save" size={24} color="white" />
+                <Text style={[styles.saveButtonText, { marginLeft: 8 }]}>Guardar</Text>
+              </TouchableOpacity>
+
+            </View>
+          </SafeAreaView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };

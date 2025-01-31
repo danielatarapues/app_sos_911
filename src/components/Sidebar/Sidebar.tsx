@@ -12,6 +12,10 @@ import { LogOut, Home, User, Settings, PhoneCall, Users } from 'lucide-react-nat
 import { styles } from './SidebarStyles';
 import { CustomSidebarProps, MenuItem, RootStackParamList } from './types';
 import { normalize } from '../../utils/dimensions';
+import { MapPin } from 'lucide-react-native';  // Importar el ícono MapPin
+
+// El resto de tu código sigue igual...
+
 
 const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
   const [slideAnim] = useState(new Animated.Value(-styles.sidebar.width));
@@ -25,6 +29,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Perfil', screen: 'Profile' },
     { title: 'Grupos', screen: 'Groups' },
     { title: 'Configuración', screen: 'Settings' },
+    { title: 'Ubicación', screen: 'Location' },
   ];
 
   // Manejador del botón de retroceso en Android
@@ -75,8 +80,11 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <Settings size={iconSize} color={iconColor} />;
       case 'Grupos':
         return <Users size={iconSize} color={iconColor} />;
+        case 'Ubicación':  // Icono para "Ubicación"
+        return <MapPin size={iconSize} color={iconColor} />;
       default:
         return null;
+        
     }
   };
 
