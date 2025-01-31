@@ -15,6 +15,7 @@ export type RootStackParamList = {
   AddContact: { addContact: (contact: Contact) => void };
   EditContact: { contactId: string };
   Location: undefined; // Asegúrate de agregar esta línea
+  Information: undefined;
 };
 
 // Tipos de navegación específicos para cada pantalla

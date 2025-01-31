@@ -30,6 +30,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Grupos', screen: 'Groups' },
     { title: 'Configuración', screen: 'Settings' },
     { title: 'Ubicación', screen: 'Location' },
+    { title: 'Informacion', screen: 'Information' },
   ];
 
   // Manejador del botón de retroceso en Android
@@ -82,6 +83,8 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <Users size={iconSize} color={iconColor} />;
         case 'Ubicación':  // Icono para "Ubicación"
         return <MapPin size={iconSize} color={iconColor} />;
+        case 'Informacion':
+          return <Users size={iconSize} color={iconColor} />;
       default:
         return null;
         
