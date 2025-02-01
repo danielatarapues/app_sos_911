@@ -14,6 +14,7 @@ import GroupChatScreen from './src/screens/Groups/Chat/GroupChat';
 import LocationScreen from './src/screens/Location/Location';
 import ProfileScreen from './src/screens/Profile/Profile';
 import InformationScreen from './src/screens/Information/Information';
+import NotificationsScreen from './src/screens/Notifications/Notifications';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -37,8 +38,9 @@ export default function App() {
           <Stack.Screen name="Groups" component={GroupsScreen} />
           <Stack.Screen name="GroupChat" component={GroupChatScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
-          <Stack.Screen name="Information" component={InformationScreen} />
           <Stack.Screen name="Location" component={LocationScreen} />
+          <Stack.Screen name="Notifications" component={NotificationsScreen} />
+          <Stack.Screen name="Information" component={InformationScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

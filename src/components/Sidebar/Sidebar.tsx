@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { LogOut, Home, User, PhoneCall, Users, Info, MapPin } from 'lucide-react-native';
+import { LogOut, Home, User, PhoneCall, Users, Info, MapPin, Bell } from 'lucide-react-native';
 import { styles } from './SidebarStyles';
 import { CustomSidebarProps, MenuItem, RootStackParamList } from './types';
 import { normalize } from '../../utils/dimensions';
@@ -25,6 +25,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Perfil', screen: 'Profile' },
     { title: 'Grupos', screen: 'Groups' },
     { title: 'Ubicación', screen: 'Location' },
+    { title: 'Notificaciónes', screen: 'Notifications' },
     { title: 'Información', screen: 'Information' },
   ];
 
@@ -73,6 +74,8 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
         return <Users size={iconSize} color={iconColor} />;
       case 'Ubicación':
         return <MapPin size={iconSize} color={iconColor} />;
+      case 'Notificaciónes':
+        return <Bell size={iconSize} color={iconColor} />;
       case 'Información':
         return <Info size={iconSize} color={iconColor} />;
       default:
@@ -113,7 +116,7 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
       >
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
-            <Image 
+            <Image
               source={require('../../assets/logo/icon.png')}
               style={styles.headerImage}
               resizeMode="contain"

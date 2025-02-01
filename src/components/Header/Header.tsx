@@ -33,6 +33,8 @@ const Header: React.FC<HeaderProps> = ({
         return 'Ubicación';
       case 'Information':
         return 'Información';
+        case 'Notifications':
+          return 'Notificaciónes';
       default:
         return 'Inicio';
     }
