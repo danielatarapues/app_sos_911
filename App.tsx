@@ -15,6 +15,8 @@ import LocationScreen from './src/screens/Location/Location';
 import ProfileScreen from './src/screens/Profile/Profile';
 import InformationScreen from './src/screens/Information/Information';
 import NotificationsScreen from './src/screens/Notifications/Notifications';
+import AlertHistoryScreen from './src/screens/Details/AlertHistory';
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -41,6 +43,7 @@ export default function App() {
           <Stack.Screen name="Location" component={LocationScreen} />
           <Stack.Screen name="Notifications" component={NotificationsScreen} />
           <Stack.Screen name="Information" component={InformationScreen} />
+          <Stack.Screen name="AlertHistory" component={AlertHistoryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

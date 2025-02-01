@@ -36,6 +36,7 @@ export type RootStackParamList = {
   EditContact: { contactId: string };
   Location: undefined;
   Information: undefined;
+  AlertHistory: undefined;
 };
 
 // Tipos de navegación específicos para cada pantalla
@@ -54,6 +55,7 @@ export type SettingsScreenNavigationProp = NativeStackNavigationProp<RootStackPa
 export type ContactDetailsRouteProp = RouteProp<RootStackParamList, 'ContactDetails'>;
 export type AddContactRouteProp = RouteProp<RootStackParamList, 'AddContact'>;
 export type EditContactRouteProp = RouteProp<RootStackParamList, 'EditContact'>;
+export type AlertHistoryRouteProp = RouteProp<RootStackParamList, 'AlertHistory'>;
 export type GroupChatRouteProp = RouteProp<RootStackParamList, 'GroupChat'>;
 
 // Tipos para las props de los componentes de pantalla
