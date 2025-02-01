@@ -11,6 +11,7 @@ export type RootStackParamList = {
   EmergencyContacts: undefined;
   Profile: undefined;
   Settings: undefined;
+  Notifications: undefined;
   ContactDetails: { contact: Contact };
   AddContact: { addContact: (contact: Contact) => void };
   EditContact: { contactId: string };

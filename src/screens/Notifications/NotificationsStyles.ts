@@ -2,9 +2,14 @@ import { StyleSheet, Platform, StatusBar } from 'react-native';
 import { normalize } from '../../utils/dimensions';
 
 export const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: 'transparent',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   content: {
@@ -23,11 +28,11 @@ export const styles = StyleSheet.create({
   profileName: {
     fontSize: normalize(18),
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ffffff',
     marginTop: normalize(10),
   },
   notificationCard: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     padding: normalize(15),
     borderRadius: normalize(10),
     marginBottom: normalize(10),
@@ -36,6 +41,8 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.2)',
   },
   notificationHeader: {
     flexDirection: 'row',
@@ -62,7 +69,7 @@ export const styles = StyleSheet.create({
   notificationTitle: {
     fontSize: normalize(16),
     fontWeight: 'bold',
-    color: '#ff6600',
+    color: '#bf662b', // Color por defecto
   },
   notificationDescription: {
     fontSize: normalize(14),
@@ -74,9 +81,21 @@ export const styles = StyleSheet.create({
     height: normalize(40),
     borderRadius: normalize(20),
   },
-  actionButtons: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: normalize(10),
+  communityText: {
+    fontSize: normalize(14),
+    fontWeight: 'bold',
+    color: '#ffffff', // Cambia este color al que desees
+  },
+
+
+  // Estilos específicos para cada tipo de alerta
+  sosAlert: {
+    color: '#d1440c', // Naranja para indicar advertencia
+  },
+  alert911: {
+    color: '#bf1515', // Rojo para indicar emergencia 
+  },
+  unnecessaryAlert: {
+    color: '#076b2c', // Verde para alertas innecesarias
   },
 });
