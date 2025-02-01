@@ -16,86 +16,111 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: normalize(15),
   },
-  profileContainer: {
-    alignItems: 'center',
-    marginBottom: normalize(20),
-  },
-  profilePicture: {
-    width: normalize(80),
-    height: normalize(80),
-    borderRadius: normalize(40),
-  },
-  profileName: {
-    fontSize: normalize(18),
-    fontWeight: 'bold',
-    color: '#ffffff',
-    marginTop: normalize(10),
-  },
   notificationCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    padding: normalize(15),
-    borderRadius: normalize(10),
-    marginBottom: normalize(10),
+    backgroundColor: '#ffffff',
+    padding: normalize(20),
+    borderRadius: normalize(15),
+    marginBottom: normalize(15),
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
     borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.2)',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
   },
   notificationHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: normalize(5),
+    marginBottom: normalize(10),
   },
   communityText: {
-    fontSize: normalize(14),
+    fontSize: normalize(16),
     fontWeight: 'bold',
-    color: '#333',
+    color: '#2d2d2d',
+    textAlign: 'left', // Alineación ajustada
   },
   timeText: {
-    fontSize: normalize(12),
-    color: '#666',
+    fontSize: normalize(14),
+    color: '#9b9b9b',
+    textAlign: 'right',
   },
   notificationContent: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: normalize(10),
   },
   notificationInfo: {
     flex: 1,
-    marginLeft: normalize(10),
+    marginLeft: normalize(15),
   },
   notificationTitle: {
-    fontSize: normalize(16),
+    fontSize: normalize(18),
     fontWeight: 'bold',
-    color: '#bf662b', // Color por defecto
+    color: '#333',
   },
   notificationDescription: {
     fontSize: normalize(14),
     color: '#666',
-    marginTop: normalize(2),
+    marginTop: normalize(4),
   },
   profileImage: {
-    width: normalize(40),
-    height: normalize(40),
-    borderRadius: normalize(20),
+    width: normalize(50),
+    height: normalize(50),
+    borderRadius: normalize(25),
+    borderWidth: 2,
+    borderColor: '#ffffff',
   },
-  communityText: {
+  notificationActions: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: normalize(10),
+    width: '100%',
+  },
+  deleteButton: {
+    backgroundColor: '#00ACAC',
+    padding: normalize(10),
+    borderRadius: normalize(5),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  innecesarioButton: {
+    backgroundColor: '#FF7F7F',
+    padding: normalize(10),
+    borderRadius: normalize(5),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  deleteText: {
     fontSize: normalize(14),
+    color: '#fff',
     fontWeight: 'bold',
-    color: '#ffffff', // Cambia este color al que desees
+    marginRight: normalize(5),
   },
-
-
-  // Estilos específicos para cada tipo de alerta
   sosAlert: {
-    color: '#d1440c', // Naranja para indicar advertencia
+    fontSize: normalize(18),
+    fontWeight: 'bold',
+    color: '#FF9E5D',
   },
   alert911: {
-    color: '#bf1515', // Rojo para indicar emergencia 
+    fontSize: normalize(18),
+    fontWeight: 'bold',
+    color: '#FF4D4D',
   },
   unnecessaryAlert: {
-    color: '#076b2c', // Verde para alertas innecesarias
+    fontSize: normalize(18),
+    fontWeight: 'bold',
+    color: '#2F7E70',
+  },
+  innecesarioText: {
+    fontSize: normalize(14),
+    color: '#fff',
+    fontWeight: 'bold',
+    marginLeft: normalize(10),
   },
 });
