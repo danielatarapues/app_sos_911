@@ -26,8 +26,9 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
     { title: 'Grupos', screen: 'Groups' },
     { title: 'Ubicación', screen: 'Location' },
     { title: 'Notificaciónes', screen: 'Notifications' },
-    { title: 'Historial de Alarma', screen: 'AlertHistory' },
+    { title: 'Historial de Alertas', screen: 'AlertHistory' },
     { title: 'Información', screen: 'Information' },
+    
   ];
 
   useEffect(() => {
@@ -63,28 +64,23 @@ const CustomSidebar: React.FC<CustomSidebarProps> = ({ isOpen, onClose }) => {
   const renderIcon = (title: string) => {
     const iconSize = normalize(20);
     const iconColor = '#ffff';
-
-    switch (title) {
-      case 'Inicio':
-        return <Home size={iconSize} color={iconColor} />;
-      case 'Contactos de Emergencia':
-        return <PhoneCall size={iconSize} color={iconColor} />;
-      case 'Perfil':
-        return <User size={iconSize} color={iconColor} />;
-      case 'Grupos':
-        return <Users size={iconSize} color={iconColor} />;
-      case 'Ubicación':
-        return <MapPin size={iconSize} color={iconColor} />;
-      case 'Notificaciónes':
-        return <Bell size={iconSize} color={iconColor} />;
-      case 'Información':
-        return <Info size={iconSize} color={iconColor} />;
-      case 'Historial de Alarma': // 📌 Se agrega ícono para este elemento
-        return <BellRing size={iconSize} color={iconColor} />;
-      default:
-        return null;
+  
+    const normalizedTitle = title.toLowerCase().trim();
+  
+    if (normalizedTitle.includes('inicio')) return <Home size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('contactos')) return <PhoneCall size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('perfil')) return <User size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('grupos')) return <Users size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('ubicación')) return <MapPin size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('notificación')) return <Bell size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('información')) return <Info size={iconSize} color={iconColor} />;
+    if (normalizedTitle.includes('historial') || normalizedTitle.includes('alerta')) {
+      return <BellRing size={iconSize} color={iconColor} />;
     }
+  
+    return null;
   };
+  
 
   const handleLogout = () => {
     onClose();
