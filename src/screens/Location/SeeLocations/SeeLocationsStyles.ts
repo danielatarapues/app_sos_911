@@ -9,20 +9,23 @@ export const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo oscuro con transparencia para que resalte el contenido
-    justifyContent: 'center',
+    justifyContent: 'flex-start',  // Cambiado a 'flex-start' para alinear el Header arriba
     alignItems: 'center',
-    padding: 20,
+    paddingTop: 5, // Añadido un pequeño margen superior
+    paddingLeft: 20,
+    paddingRight: 20,
     width: '100%',
   },
+  
   modalMap: {
     width: '100%',
     height: '42%',
-    borderRadius: 15,
+    borderRadius: 10000,
     overflow: 'hidden',
     marginBottom: 15,
   },
   locationsList: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Hacerlo más transparente
     width: '100%',
     padding: 15,
     borderRadius: 15,
@@ -32,7 +35,8 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 5, // Sombra para Android
-  },
+  }
+  ,
   locationsTitle: {
     fontSize: 13, // Tamaño de letra 13 para "Mis Ubicaciones"
     fontWeight: 'bold',
@@ -74,6 +78,6 @@ export const styles = StyleSheet.create({
   },
   locationItemIcon: {
     fontSize: 20, // Tamaño del ícono
-    color: '#007AFF', // Color del ícono
+    color: '#4CAF50', // Verde medio (puedes cambiarlo según tu preferencia)
   },
 });
