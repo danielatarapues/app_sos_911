@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(5),
   },
   infoButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#00ACAC',
     paddingVertical: normalize(6),
     paddingHorizontal: normalize(15),
     borderRadius: normalize(5),

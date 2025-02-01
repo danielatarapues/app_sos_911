@@ -1,70 +1,80 @@
-// Groups.tsx
 import React, { useState } from 'react';
 import { 
   View, 
   Text, 
-  TextInput, 
   TouchableOpacity, 
   Image, 
   FlatList,
   SafeAreaView,
-  Alert,
-  ImageBackground
+  ImageBackground,
+  ImageSourcePropType,
+  StyleSheet
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import styles from './GroupsStyles';
 import Header from '../../components/Header/Header';
 import CustomSidebar from '../../components/Sidebar/Sidebar';
-import { Group, GroupMember, GroupsScreenProps } from './types';
+import AddGroup from './Add/AddGroup';
+import { GroupsScreenProps } from '../../navigation/Navigator';
+import styles from './GroupsStyles';
+
+
+interface GroupMember {
+  id: string;
+  name: string;
+  image: ImageSourcePropType;
+}
+
+interface Group {
+  id: string;
+  name: string;
+  description: string;
+  members: GroupMember[];
+  image?: ImageSourcePropType;
+}
 
 export const GroupsScreen: React.FC<GroupsScreenProps> = ({ navigation }) => {
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [groups, setGroups] = useState<Group[]>([
+    {
+      id: '1',
+      name: 'Familia',
+      description: 'Grupo familiar para compartir momentos especiales',
+      members: [
+        { id: '1', name: 'Juan Pérez', image: require('../../assets/erick.jpg') },
+        { id: '2', name: 'María García', image: require('../../assets/erick.jpg') },
+        { id: '3', name: 'Carlos López', image: require('../../assets/erick.jpg') }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Amigos del Trabajo',
+      description: 'Grupo para coordinar actividades con compañeros',
+      members: [
+        { id: '2', name: 'María García', image: require('../../assets/erick.jpg') },
+        { id: '3', name: 'Carlos López', image: require('../../assets/erick.jpg') }
+      ]
+    }
+  ]);
   const [isCreating, setIsCreating] = useState(false);
-  const [newGroupName, setNewGroupName] = useState('');
-  const [newGroupDesc, setNewGroupDesc] = useState('');
-  const [selectedMembers, setSelectedMembers] = useState<GroupMember[]>([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  // Mock data for available contacts
-  const availableContacts: GroupMember[] = [
-    { id: '1', name: 'John Doe', image: 'https://placeholder.com/50' },
-    { id: '2', name: 'Jane Smith', image: 'https://placeholder.com/50' },
-    { id: '3', name: 'Mike Johnson', image: 'https://placeholder.com/50' },
-  ];
-
-  const createNewGroup = () => {
-    if (!newGroupName.trim() || selectedMembers.length === 0) {
-      Alert.alert('Error', 'Please enter a group name and select at least one member');
-      return;
-    }
-
-    const newGroup: Group = {
-      id: Date.now().toString(),
-      name: newGroupName,
-      description: newGroupDesc,
-      members: selectedMembers,
-    };
-
+  const handleCreateGroup = (newGroup: Group) => {
     setGroups([...groups, newGroup]);
     setIsCreating(false);
-    setNewGroupName('');
-    setNewGroupDesc('');
-    setSelectedMembers([]);
-  };
-
-  const toggleMemberSelection = (member: GroupMember) => {
-    if (selectedMembers.find(m => m.id === member.id)) {
-      setSelectedMembers(selectedMembers.filter(m => m.id !== member.id));
-    } else {
-      setSelectedMembers([...selectedMembers, member]);
-    }
   };
 
   const renderGroup = ({ item }: { item: Group }) => (
-    <TouchableOpacity style={styles.groupItem}>
+    <TouchableOpacity 
+      style={styles.groupItem}
+      activeOpacity={0.7}
+      onPress={() => navigation.navigate('GroupChat', { group: item })}
+    >
       <View style={styles.groupImageContainer}>
         {item.image ? (
-          <Image source={{ uri: item.image }} style={styles.groupImage} />
+          <Image 
+            source={item.image} 
+            style={styles.groupImage}
+            defaultSource={require('../../assets/erick.jpg')}
+          />
         ) : (
           <View style={styles.groupImagePlaceholder}>
             <Text style={styles.groupImagePlaceholderText}>
@@ -76,7 +86,7 @@ export const GroupsScreen: React.FC<GroupsScreenProps> = ({ navigation }) => {
       <View style={styles.groupInfo}>
         <Text style={styles.groupName}>{item.name}</Text>
         <Text style={styles.groupMembers}>
-          {item.members.length} members
+          {item.members.length} {item.members.length === 1 ? 'miembro' : 'miembros'}
         </Text>
       </View>
     </TouchableOpacity>
@@ -84,78 +94,10 @@ export const GroupsScreen: React.FC<GroupsScreenProps> = ({ navigation }) => {
 
   if (isCreating) {
     return (
-      <ImageBackground 
-        source={require('../../assets/fondo.png')} 
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      >
-        <SafeAreaView style={styles.container}>
-          <Header 
-            onMenuPress={() => setSidebarOpen(true)}
-            customTitle="Nuevo Grupo"
-            showBackButton
-            onBackPress={() => setIsCreating(false)}
-          />
-
-          <View style={styles.createGroupForm}>
-            <TextInput
-              style={styles.input}
-              placeholder="Nombre del Grupo"
-              value={newGroupName}
-              onChangeText={setNewGroupName}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Descripción (opcional)"
-              value={newGroupDesc}
-              onChangeText={setNewGroupDesc}
-            />
-
-            <Text style={styles.sectionTitle}>Agregar Participantes</Text>
-            <FlatList
-              data={availableContacts}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity 
-                  style={styles.contactItem}
-                  onPress={() => toggleMemberSelection(item)}
-                >
-                  <Image 
-                    source={{ uri: item.image }} 
-                    style={styles.contactImage}
-                  />
-                  <Text style={styles.contactName}>{item.name}</Text>
-                  {selectedMembers.find(m => m.id === item.id) && (
-                    <Ionicons 
-                      name="checkmark-circle" 
-                      size={24} 
-                      color="#007AFF" 
-                      style={styles.selectedIcon}
-                    />
-                  )}
-                </TouchableOpacity>
-              )}
-            />
-
-            <TouchableOpacity 
-              style={[
-                styles.createButton,
-                (!newGroupName.trim() || selectedMembers.length === 0) && 
-                styles.createButtonDisabled
-              ]}
-              onPress={createNewGroup}
-              disabled={!newGroupName.trim() || selectedMembers.length === 0}
-            >
-              <Text style={styles.createButtonText}>Crear Grupo</Text>
-            </TouchableOpacity>
-          </View>
-
-          <CustomSidebar
-            isOpen={isSidebarOpen}
-            onClose={() => setSidebarOpen(false)}
-          />
-        </SafeAreaView>
-      </ImageBackground>
+      <AddGroup 
+        onCreateGroup={handleCreateGroup}
+        onCancel={() => setIsCreating(false)}
+      />
     );
   }
 
@@ -177,6 +119,7 @@ export const GroupsScreen: React.FC<GroupsScreenProps> = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             renderItem={renderGroup}
             style={styles.content}
+            showsVerticalScrollIndicator={false}
           />
         ) : (
           <View style={styles.emptyState}>
@@ -190,8 +133,9 @@ export const GroupsScreen: React.FC<GroupsScreenProps> = ({ navigation }) => {
         <TouchableOpacity 
           style={styles.fab}
           onPress={() => setIsCreating(true)}
+          activeOpacity={0.7}
         >
-          <Ionicons name="add" size={24} color="#FFFFFF" />
+          <Ionicons name="add" size={32} color="#FFFFFFFF" />
         </TouchableOpacity>
 
         <CustomSidebar
