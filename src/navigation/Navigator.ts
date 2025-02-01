@@ -14,6 +14,7 @@ export type RootStackParamList = {
   ContactDetails: { contact: Contact };
   AddContact: { addContact: (contact: Contact) => void };
   EditContact: { contactId: string };
+  AlertHistory: undefined;
 };
 
 // Tipos de navegación específicos para cada pantalla
@@ -26,8 +27,10 @@ export type ContactDetailsScreenNavigationProp = NativeStackNavigationProp<RootS
 export type AddContactScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'AddContact'>;
 export type ProfileScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Profile'>;
 export type SettingsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Settings'>;
+export type AlertHistoryScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'AlertHistory'>;
 
 // Tipos para las props de ruta específicas
 export type ContactDetailsRouteProp = RouteProp<RootStackParamList, 'ContactDetails'>;
 export type AddContactRouteProp = RouteProp<RootStackParamList, 'AddContact'>;
 export type EditContactRouteProp = RouteProp<RootStackParamList, 'EditContact'>;
+export type AlertHistoryRouteProp = RouteProp<RootStackParamList, 'AlertHistory'>;

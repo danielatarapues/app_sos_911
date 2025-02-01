@@ -8,6 +8,8 @@ export type RootStackParamList = {
   Groups: undefined;
   Settings: undefined;
   Login: undefined;
+  AlertHistory: undefined; // Added AlertHistory screen
+
 };
 
 // Props para el componente Sidebar
