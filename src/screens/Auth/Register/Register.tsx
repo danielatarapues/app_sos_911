@@ -1,5 +1,5 @@
 // Register.tsx
-
+// Importaciones necesarias desde React y React Native
 import React, { useState } from 'react';
 import {
   View,
@@ -19,8 +19,12 @@ import { RegisterStyles } from './RegisterStyles';
 import { RegisterScreenNavigationProp } from '../../../navigation/Navigator';
 import { Ionicons } from '@expo/vector-icons'; // Importa los íconos de Ionicons
 
+// Componente funcional para la pantalla de registro
 export default function RegisterScreen() {
+  // Hook de navegación para manejar cambios de pantalla
   const navigation = useNavigation<RegisterScreenNavigationProp>();
+
+  // Estado local para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -29,27 +33,35 @@ export default function RegisterScreen() {
     confirmPassword: '',
   });
 
-  const [showPassword, setShowPassword] = useState(false); // Control de visibilidad de la contraseña
+  // Estados para manejar la visibilidad de las contraseñas
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // Función para manejar el registro del usuario
   const handleRegister = () => {
-    Keyboard.dismiss();
-    navigation.navigate('Login');
+    Keyboard.dismiss(); // Oculta el teclado al presionar el botón de registro
+    navigation.navigate('Login'); // Navega a la pantalla de inicio de sesión
   };
 
   return (
+    // Contenedor seguro para manejar los bordes de la pantalla en dispositivos modernos
     <SafeAreaView style={RegisterStyles.container}>
+      {/* Configuración de la barra de estado */}
       <StatusBar barStyle="light-content" backgroundColor="#00ACAC" />
+      
+      {/* Evita que el teclado cubra los campos en iOS */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{ flex: 1 }}
       >
+        {/* Permite cerrar el teclado al tocar fuera de los campos de entrada */}
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={RegisterStyles.scrollContent}
             bounces={false}
           >
+            {/* Encabezado de la pantalla */}
             <View style={RegisterStyles.headerContainer}>
               <Text style={RegisterStyles.title}>Crear Cuenta</Text>
               <Text style={RegisterStyles.subtitle}>
@@ -57,7 +69,9 @@ export default function RegisterScreen() {
               </Text>
             </View>
 
+            {/* Contenedor del formulario de registro */}
             <View style={RegisterStyles.formContainer}>
+              {/* Campo de entrada para el nombre completo */}
               <View style={RegisterStyles.inputGroup}>
                 <Text style={RegisterStyles.label}>Nombre completo</Text>
                 <TextInput
@@ -71,6 +85,7 @@ export default function RegisterScreen() {
                 />
               </View>
 
+              {/* Campo de entrada para el correo electrónico */}
               <View style={RegisterStyles.inputGroup}>
                 <Text style={RegisterStyles.label}>Correo electrónico</Text>
                 <TextInput
@@ -86,6 +101,7 @@ export default function RegisterScreen() {
                 />
               </View>
 
+              {/* Campo de entrada para la dirección */}
               <View style={RegisterStyles.inputGroup}>
                 <Text style={RegisterStyles.label}>Dirección</Text>
                 <TextInput
@@ -98,6 +114,7 @@ export default function RegisterScreen() {
                 />
               </View>
 
+              {/* Campo de entrada para la contraseña */}
               <View style={RegisterStyles.inputGroup}>
                 <Text style={RegisterStyles.label}>Contraseña</Text>
                 <View style={RegisterStyles.passwordContainer}>
@@ -110,18 +127,13 @@ export default function RegisterScreen() {
                     onChangeText={(text) => setFormData({ ...formData, password: text })}
                     returnKeyType="next"
                   />
-                  <TouchableOpacity
-                    onPress={() => setShowPassword(!showPassword)}
-                  >
-                    <Ionicons
-                      name={showPassword ? 'eye-off' : 'eye'}
-                      size={24}
-                      color="#999"
-                    />
+                  <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color="#999" />
                   </TouchableOpacity>
                 </View>
               </View>
 
+              {/* Campo de entrada para confirmar la contraseña */}
               <View style={RegisterStyles.inputGroup}>
                 <Text style={RegisterStyles.label}>Confirmar contraseña</Text>
                 <View style={RegisterStyles.passwordContainer}>
@@ -134,19 +146,13 @@ export default function RegisterScreen() {
                     onChangeText={(text) => setFormData({ ...formData, confirmPassword: text })}
                     returnKeyType="done"
                   />
-                  <TouchableOpacity
-                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    <Ionicons
-                      name={showConfirmPassword ? 'eye-off' : 'eye'}
-                      size={24}
-                      color="#999"
-                    />
+                  <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                    <Ionicons name={showConfirmPassword ? 'eye-off' : 'eye'} size={24} color="#999" />
                   </TouchableOpacity>
                 </View>
               </View>
 
-              {/* Mensaje de Términos y Política de Datos */}
+              {/* Mensaje de términos y política de privacidad */}
               <View style={RegisterStyles.termsContainer}>
                 <Text style={RegisterStyles.termsText}>
                   Al hacer clic en Registrarse, aceptas nuestros{' '}
@@ -156,20 +162,15 @@ export default function RegisterScreen() {
                 </Text>
               </View>
 
-              <TouchableOpacity
-                style={RegisterStyles.registerButton}
-                onPress={handleRegister}
-                activeOpacity={0.7}
-              >
+              {/* Botón de registro */}
+              <TouchableOpacity style={RegisterStyles.registerButton} onPress={handleRegister} activeOpacity={0.7}>
                 <Text style={RegisterStyles.registerButtonText}>Registrarse</Text>
               </TouchableOpacity>
 
+              {/* Enlace para iniciar sesión si ya tiene una cuenta */}
               <View style={RegisterStyles.loginContainer}>
                 <Text style={RegisterStyles.loginText}>¿Ya tienes una cuenta?</Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Login')}
-                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                >
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                   <Text style={RegisterStyles.loginLink}>Iniciar sesión</Text>
                 </TouchableOpacity>
               </View>

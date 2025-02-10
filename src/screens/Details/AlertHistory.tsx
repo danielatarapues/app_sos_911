@@ -4,9 +4,11 @@ import Header from '../../components/Header/Header';
 import CustomSidebar from '../../components/Sidebar/Sidebar';
 import styles from './AlertHistoryStyles';
 
+// Definición de tipos para las alertas
 type AlertType = 'SOS' | '911';
 type AlertStatus = 'Resuelto' | 'Activo';
 
+// Datos de ejemplo para las alertas
 const alertHistory: { id: number; type: AlertType; date: string; location: string; status: AlertStatus }[] = [
     { id: 1, type: 'SOS', date: '10-11-24 / 7:53:36 pm', location: 'Av. 6 de Diciembre y Patria, Quito, Ecuador', status: 'Resuelto' },
     { id: 2, type: '911', date: '28-09-24 / 8:28:49 pm', location: 'Av. Amazonas y Colón, Quito, Ecuador', status: 'Activo' },
